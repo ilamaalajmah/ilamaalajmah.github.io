@@ -76,7 +76,7 @@ async function initializeGame() {
     centeredContent.appendChild(startButton);
 
     const footer = document.createElement("footer");
-    footer.innerHTML = "عمل الطالبة: لمى.";
+    footer.innerHTML = "جميع الحقوق المحفوظة لصالح لمى العجمة.";
 
     welcomeScreen.innerHTML = "";
     welcomeScreen.appendChild(header);
