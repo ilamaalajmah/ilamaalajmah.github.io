@@ -1,0 +1,468 @@
+* {
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding: 0.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 2rem;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body, html {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: var(--justify-center, center);
+  align-items: var(--align-items, center);
+}
+
+#welcome-screen, #game-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#game-screen {
+  position: relative;
+  overflow: hidden; /* Add this line to contain the fireworks */
+  display: none;
+  width: 90%;
+  max-width: 1200px;
+  position: relative; /* Added from main.ts */
+  justify-content: start;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #85BB65;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+#game-info-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#game-area {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1;
+}
+
+#puzzle-container, #full-image-container {
+  width: 48%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  #game-area {
+    flex-direction: column;
+  }
+
+  #puzzle-container, #full-image-container {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  #game-info-bar {
+    align-items: center;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.puzzle-piece {
+  height: fit-content;
+  overflow: hidden;
+}
+
+.puzzle-piece > div {
+  position: relative;
+}
+
+#player-name {
+  width: 100%;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  margin-bottom: 1em;
+  border: 2px solid #85BB65;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #000;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+#player-name:focus {
+  outline: none;
+  border-color: #535bf2;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#player-name::placeholder {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+#player-name::selection {
+  background-color: rgba(100, 108, 255, 0.3);
+  color: #000;
+}
+
+.leaderboard-container {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard th,
+.leaderboard td {
+  padding: 0.75rem;
+  text-align: center;
+  color: #333;
+}
+
+.leaderboard thead {
+  background-color: #85BB65;
+  color: white;
+}
+
+.leaderboard thead tr {
+  background-color: #85bb65; /* Conflict with the above rule */
+  color: white;
+}
+
+.leaderboard th {
+  padding: 10px;
+}
+
+.leaderboard tbody tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.leaderboard tbody tr:hover {
+  background-color: #e8e8ff;
+}
+
+.top-1 {
+  background-color: rgba(255, 215, 0, 0.2) !important;
+}
+
+.top-2 {
+  background-color: rgba(192, 192, 192, 0.2) !important;
+}
+
+.top-3 {
+  background-color: rgba(205, 127, 50, 0.2) !important;
+}
+
+.fa-crown.gold {
+  color: #ffd700;
+}
+
+.fa-crown.silver {
+  color: #c0c0c0;
+}
+
+.fa-crown.bronze {
+  color: #cd7f32;
+}
+
+#game-over-screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  border: 1px solid #000;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+#game-over-screen #game-header {
+  width: 100%;
+  position: static;
+  box-shadow: none;
+}
+
+.game-over-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.leaderboard-container {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+#game-over-screen h2,
+#game-over-screen h3 {
+  color: #85BB65;
+  margin-bottom: 1rem;
+}
+
+#game-over-screen p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+#restart-game {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  background-color: #85BB65;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#restart-game:hover {
+  background-color: #6fa054;
+}
+
+@media (min-width: 768px) {
+  #game-over-screen {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  #game-over-screen {
+    padding: 1rem;
+  }
+}
+
+#puzzle-container {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 0 auto;
+  
+}
+
+#full-image-container {
+  width: 48%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#fireworks-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+
+/* Add these new styles for the logo container and logos */
+#welcome-screen {
+  position: relative;
+  gap: 2rem;
+  width: 100%;
+  border: 3px inset #3E8E41;
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+#logo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Add this new style for the centered content */
+#centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* Add this new style for the bottom spacer */
+#bottom-spacer {
+  height: 80px; /* Adjust this value as needed */
+}
+
+footer {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+#falling-tree-leaves-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#game-header {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+#logo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+#game-screen {
+}
+
+/* Adjust the existing styles for #welcome-screen and #game-screen */
+#welcome-screen, #game-screen {
+  width: 100%;
+  min-height: calc(100% - 80px); /* Subtract the header height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#game-screen {
+  justify-content: start;
+}
+
+#logo-container > :first-child {
+  margin-right: auto;
+}
+
+#full-image-container {
+  display: none;
+
+}
+
+#logo-container > :last-child {
+  margin-left: auto;
+}

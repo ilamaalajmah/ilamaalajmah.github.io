@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مسابقة اليوم الوطني</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div id="app">
+    <div id="welcome-screen">
+      <h1>مسابقة اليوم الوطني</h1>
+      <input type="text" id="player-name" placeholder="أدخل اسمك" required>
+      <button id="start-game">ابدأ اللعبة</button>
+    </div>
+    <div id="game-screen" style="display: none;">
+      <div id="game-info-bar">
+        <div id="level">المستوى: <span>1</span></div>
+        <div id="timer">الوقت: <span>00:00</span></div>
+        <div id="score">النقاط: <span>0</span></div>
+      </div>
+      <div id="game-area">
+        <div id="puzzle-container" dir="ltr"></div>
+        <div id="full-image-container"></div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+
+</html>
